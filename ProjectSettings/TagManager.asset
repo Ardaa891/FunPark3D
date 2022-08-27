@@ -20,6 +20,12 @@ TagManager:
   - FirstQueue
   - RightDoor
   - LeftDoor
+  - Gondol
+  - BatSpin
+  - BumperCar
+  - CrazyDance
+  - HandObject
+  - Swing
   layers:
   - Default
   - TransparentFX

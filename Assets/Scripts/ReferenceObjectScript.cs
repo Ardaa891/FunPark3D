@@ -30,18 +30,21 @@ public class ReferenceObjectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        queueCount = queue.Count;
 
-       /* if (queue.Count <= 7)
+        /*if (queue.Count <= 7)
         {
             Debug.Log("dkfhjbgjhdvgbkf");
-            gameObject.SetActive(true);
-            active = true;
+            //gameObject.SetActive(true);
+            // active = true;
+            GetComponent<BoxCollider>().enabled = true;
         }
         if(queue.Count > 7)
         {
-            gameObject.SetActive(false);
-            active = false;
+            //gameObject.SetActive(false);
+            //active = false;
+
+            GetComponent<BoxCollider>().enabled = false;
         }*/
 
         

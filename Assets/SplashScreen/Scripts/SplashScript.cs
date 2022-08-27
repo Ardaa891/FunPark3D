@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SplashScript : MonoBehaviour
 {
-    public string Scene_Name;
+    //public string Scene_Name;
     // In this example we show how to invoke a coroutine and
     // continue executing the function in parallel.
 
@@ -23,7 +23,18 @@ public class SplashScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(waitTime);
-            SceneManager.LoadScene(Scene_Name);
+            //SceneManager.LoadScene(Scene_Name);
+
+            //yeni versiyon
+
+            if(PlayerPrefs.GetInt("Tutorial") == 1)
+            {
+                SceneManager.LoadScene("FunLand");
+            }
+            else
+            {
+                SceneManager.LoadScene("FunLandTutorial");
+            }
         }
     }
 }

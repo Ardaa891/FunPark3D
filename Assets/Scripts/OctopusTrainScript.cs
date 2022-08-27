@@ -22,6 +22,8 @@ public class OctopusTrainScript : MonoBehaviour
 
     public GameObject octopusChar1, octopusChar2, octopusChar3, octopusChar4;
 
+    public GameObject pathExitObject;
+
     void Start()
     {
         Current = this;
@@ -101,12 +103,22 @@ public class OctopusTrainScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Character"))
+        {
+            octopusTrainCurrentCount--;
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PathTriggerExit"))
         {
             octopusTouchingExit = true;
+
+            pathExitObject = other.gameObject;
            
 
 
@@ -115,6 +127,8 @@ public class OctopusTrainScript : MonoBehaviour
 
 
     }
+
+    
 
     IEnumerator GetCharactersOut()
     {
@@ -138,9 +152,16 @@ public class OctopusTrainScript : MonoBehaviour
                 tmp.GetComponent<CharacterExit>().happy = true;
                 tmp.GetComponent<CharacterExit>().giveMoney = true;
 
+                //pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue.Remove(pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue[0]);
+                Invoke("RemoveChars", 0.1f);
             }
 
 
         }
+    }
+
+    public void RemoveChars()
+    {
+        pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue.Remove(pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue[0]);
     }
 }

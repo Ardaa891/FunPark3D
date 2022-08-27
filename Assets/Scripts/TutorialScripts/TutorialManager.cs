@@ -47,11 +47,11 @@ public class TutorialManager : MonoBehaviour
 
     public void TutorialTweenPartOne()
     {
-        seq.Append(text1.rectTransform.DOScale(1.5f, 0.75f).SetEase(Ease.OutQuad).SetLoops(6, LoopType.Yoyo).OnComplete(()=>text2.gameObject.SetActive(true)));
+        // seq.Append(text1.rectTransform.DOScale(1.5f, 0.75f).SetEase(Ease.OutQuad).SetLoops(6, LoopType.Yoyo).OnComplete(()=>text2.gameObject.SetActive(true)));
 
-        seq.Append(text2.rectTransform.DOScale(1.75f, 0.75f).SetEase(Ease.OutQuad).SetLoops(6, LoopType.Yoyo).OnComplete(()=>pointerHand.gameObject.SetActive(true)));
-
-        seq.Append(pointerHand.rectTransform.DOLocalMove(new Vector3(300f, -150f, 0), 1f).SetEase(Ease.OutQuad).SetLoops(-1, LoopType.Restart));
+        // seq.Append(text2.rectTransform.DOScale(1.75f, 0.75f).SetEase(Ease.OutQuad).SetLoops(6, LoopType.Yoyo).OnComplete(()=>pointerHand.gameObject.SetActive(true)));
+        pointerHand.gameObject.SetActive(true);
+        pointerHand.rectTransform.DOLocalMove(new Vector3(300f, -150f, 0), 1f).SetEase(Ease.OutQuad).SetLoops(-1, LoopType.Restart);
 
         lineObject.GetComponent<LineObjectScript>().enabled = true;
         circleClipper.GetComponent<RuntimeCircleClipper>().enabled = true;

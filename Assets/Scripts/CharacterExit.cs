@@ -12,6 +12,11 @@ public class CharacterExit : MonoBehaviour
     GameObject rocketToy;
     GameObject ferrisWheel;
     GameObject octopusTrain;
+    GameObject gondol;
+    GameObject batSpin;
+    GameObject bumperCar;
+    GameObject crazyDance;
+    GameObject swing;
 
     public GameObject coinPrefab;
     public GameObject happyPrefab;
@@ -38,6 +43,11 @@ public class CharacterExit : MonoBehaviour
         rocketToy = GameObject.FindGameObjectWithTag("RocketToy");
         ferrisWheel = GameObject.FindGameObjectWithTag("FerrisWheel");
         octopusTrain = GameObject.FindGameObjectWithTag("OctopusTrain");
+        gondol = GameObject.FindGameObjectWithTag("Gondol");
+        batSpin = GameObject.FindGameObjectWithTag("BatSpin");
+        bumperCar = GameObject.FindGameObjectWithTag("BumperCar");
+        crazyDance = GameObject.FindGameObjectWithTag("CrazyDance");
+        swing = GameObject.FindGameObjectWithTag("Swing");
 
         pathTriggerExit = GameObject.FindGameObjectWithTag("PathTriggerExit");
 
@@ -124,8 +134,107 @@ public class CharacterExit : MonoBehaviour
 
         if (other.CompareTag("OctopusTrain"))
         {
-            octopusTrain.GetComponent<OctopusTrainScript>().octopusTrainCurrentCount--;
+            //octopusTrain.GetComponent<OctopusTrainScript>().octopusTrainCurrentCount--;
             GetComponent<CharacterController>().enabled = false;
+
+            
+
+            if (happy)
+            {
+                Sequence seq = DOTween.Sequence();
+                GameObject happy = Instantiate(happyPrefab, transform.position, Quaternion.identity);
+                happy.transform.SetParent(gameObject.transform);
+
+                seq.Append(happy.transform.DOScale(0.05f, 0.5f).SetEase(Ease.OutBounce));
+                seq.Join(happy.transform.DOLocalMoveY(7f, 0.5f).SetEase(Ease.OutQuad));
+                seq.Join(happy.transform.DOLocalMoveZ(0f, 0.5f).SetEase(Ease.OutQuad));
+            }
+
+
+        }
+
+        if (other.CompareTag("Gondol"))
+        {
+            gondol.GetComponent<GondolScript>().gondolCurrentCount--;
+            GetComponent<CharacterController>().enabled = false;
+
+            if (happy)
+            {
+                Sequence seq = DOTween.Sequence();
+                GameObject happy = Instantiate(happyPrefab, transform.position, Quaternion.identity);
+                happy.transform.SetParent(gameObject.transform);
+
+                seq.Append(happy.transform.DOScale(0.05f, 0.5f).SetEase(Ease.OutBounce));
+                seq.Join(happy.transform.DOLocalMoveY(7f, 0.5f).SetEase(Ease.OutQuad));
+                seq.Join(happy.transform.DOLocalMoveZ(0f, 0.5f).SetEase(Ease.OutQuad));
+            }
+
+
+        }
+
+        if (other.CompareTag("BatSpin"))
+        {
+            batSpin.GetComponent<BatSpinScript>().batSpinCurrentCount--;
+            GetComponent<CharacterController>().enabled = false;
+
+            if (happy)
+            {
+                Sequence seq = DOTween.Sequence();
+                GameObject happy = Instantiate(happyPrefab, transform.position, Quaternion.identity);
+                happy.transform.SetParent(gameObject.transform);
+
+                seq.Append(happy.transform.DOScale(0.05f, 0.5f).SetEase(Ease.OutBounce));
+                seq.Join(happy.transform.DOLocalMoveY(7f, 0.5f).SetEase(Ease.OutQuad));
+                seq.Join(happy.transform.DOLocalMoveZ(0f, 0.5f).SetEase(Ease.OutQuad));
+            }
+
+
+        }
+
+        if (other.CompareTag("BumperCar"))
+        {
+            bumperCar.GetComponent<BumperCarScript>().bumberCarCurrentCount--;
+            GetComponent<CharacterController>().enabled = false;
+
+            if (happy)
+            {
+                Sequence seq = DOTween.Sequence();
+                GameObject happy = Instantiate(happyPrefab, transform.position, Quaternion.identity);
+                happy.transform.SetParent(gameObject.transform);
+
+                seq.Append(happy.transform.DOScale(0.05f, 0.5f).SetEase(Ease.OutBounce));
+                seq.Join(happy.transform.DOLocalMoveY(7f, 0.5f).SetEase(Ease.OutQuad));
+                seq.Join(happy.transform.DOLocalMoveZ(0f, 0.5f).SetEase(Ease.OutQuad));
+            }
+
+
+        }
+
+        if (other.CompareTag("CrazyDance"))
+        {
+            crazyDance.GetComponent<CrazyDanceScript>().crazyDanceCurrentCount--;
+            GetComponent<CharacterController>().enabled = false;
+
+
+            if (happy)
+            {
+                Sequence seq = DOTween.Sequence();
+                GameObject happy = Instantiate(happyPrefab, transform.position, Quaternion.identity);
+                happy.transform.SetParent(gameObject.transform);
+
+                seq.Append(happy.transform.DOScale(0.05f, 0.5f).SetEase(Ease.OutBounce));
+                seq.Join(happy.transform.DOLocalMoveY(7f, 0.5f).SetEase(Ease.OutQuad));
+                seq.Join(happy.transform.DOLocalMoveZ(0f, 0.5f).SetEase(Ease.OutQuad));
+            }
+
+
+        }
+
+        if (other.CompareTag("Swing"))
+        {
+            swing.GetComponent<SwingScript>().swingCurrentCount--;
+            GetComponent<CharacterController>().enabled = false;
+
 
             if (happy)
             {
@@ -150,6 +259,8 @@ public class CharacterExit : MonoBehaviour
             if (happy && giveMoney)
             {
                 HappiniesSystem.Current.happiniesAmount += 0.05f;
+
+               
 
                 OpenDoors();
 
@@ -197,13 +308,23 @@ public class CharacterExit : MonoBehaviour
         if (other.CompareTag("PreExit"))
         {
 
+            if (HappiniesSystem.Current.happiniesAmount >= 1)
+            {
+                LevelController.Current.Win();
+            }
+            else if(HappiniesSystem.Current.happiniesAmount <= 0)
+            {
+                Debug.Log("failllll");
+                LevelController.Current.GameOver();
+            }
+
             if (!happy && !giveMoney)
             {
                 preExit = true;
 
-                if(SceneManager.GetActiveScene().buildIndex != 1)
+                if(SceneManager.GetActiveScene().buildIndex != 2)
                 {
-                    HappiniesSystem.Current.happiniesAmount -= 0.05f;
+                    HappiniesSystem.Current.happiniesAmount -= 0.025f;
                 }
                 else
                 {

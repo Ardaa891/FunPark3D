@@ -15,10 +15,20 @@ public class CharacterController : MonoBehaviour
     public bool rocketQueue;
     public bool ferrisQueue;
     public bool octopusTrainQueue;
+    public bool gondolQueue;
+    public bool batSpinQueue;
+    public bool bumperCarQueue;
+    public bool crazyDanceQueue;
+    public bool swingQueue;
     public bool charHit;
     public bool inRocket;
     public bool inFerris;
     public bool inOctopusTrain;
+    public bool inGondol;
+    public bool inBatSpin;
+    public bool inBumperCar;
+    public bool inCrazyDance;
+    public bool inSwing;
 
     public bool pathExit;
     public bool goMainRoad;
@@ -159,16 +169,61 @@ public class CharacterController : MonoBehaviour
                 }
             }
 
+            if (inGondol && inPath)
+            {
+                if (GondolScript.Current.gondolCurrentCount < GondolScript.Current.gondolMaxCount)
+                {
+                    //OctopusTrainScript.Current.octopusTrainCurrentCount++;
+                    gameObject.SetActive(false);
+                }
+            }
+
+            if (inBatSpin && inPath)
+            {
+                if (BatSpinScript.Current.batSpinCurrentCount < BatSpinScript.Current.batSpinMaxCount)
+                {
+                    //OctopusTrainScript.Current.octopusTrainCurrentCount++;
+                    gameObject.SetActive(false);
+                }
+            }
+
+            if (inBumperCar && inPath)
+            {
+                if (BumperCarScript.Current.bumberCarCurrentCount < BumperCarScript.Current.bumberCarMaxCount)
+                {
+                    //OctopusTrainScript.Current.octopusTrainCurrentCount++;
+                    gameObject.SetActive(false);
+                }
+            }
+
+            if (inCrazyDance && inPath)
+            {
+                if (CrazyDanceScript.Current.crazyDanceCurrentCount < CrazyDanceScript.Current.crazyDanceMaxCount)
+                {
+                    //OctopusTrainScript.Current.octopusTrainCurrentCount++;
+                    gameObject.SetActive(false);
+                }
+            }
+
+            if (inSwing && inPath)
+            {
+                if (SwingScript.Current.swingCurrentCount < SwingScript.Current.swingMaxCount)
+                {
+                    //OctopusTrainScript.Current.octopusTrainCurrentCount++;
+                    gameObject.SetActive(false);
+                }
+            }
+
 
             if (inPath && referenceObject.GetComponent<ReferenceObjectScript>().queue.IndexOf(gameObject) == 0 && !exitQueue)
             {
 
-                if (!OctopusTrainScript.Current.octopusTrainFull && !RocketScript.Current.rocketFull && !FerrisScript.Current.ferrisFull)
+                if (!OctopusTrainScript.Current.octopusTrainFull && !RocketScript.Current.rocketFull && !FerrisScript.Current.ferrisFull && !GondolScript.Current.gondolFull && !BatSpinScript.Current.batSpinFull && !BumperCarScript.Current.bumperCarFull && !CrazyDanceScript.Current.crazyDanceFull && !SwingScript.Current.swingFull)
                 {
                     transform.DOPlay();
                 }
 
-                if (!octopusTrainQueue && !rocketQueue && !ferrisQueue)
+                if (!octopusTrainQueue && !rocketQueue && !ferrisQueue && !gondolQueue && !batSpinQueue && !bumperCarQueue && !crazyDanceQueue && !swingQueue)
                 {
                     transform.DOPlay();
                 }
@@ -248,6 +303,76 @@ public class CharacterController : MonoBehaviour
                         else
                         {
                             SixtyPercent(other.gameObject);
+                        }
+                    }
+
+                    if (other.transform.GetChild(0).GetComponent<ReferenceObjectExitScript>().checkGondol)
+                    {
+
+                        if (GondolScript.Current.gondolCurrentCount != GondolScript.Current.gondolMaxCount)
+                        {
+
+                            EightyPercent(other.gameObject);
+                        }
+                        else
+                        {
+                            SixtyPercent(other.gameObject);
+                        }
+                    }
+
+                    if (other.transform.GetChild(0).GetComponent<ReferenceObjectExitScript>().checkBatSpin)
+                    {
+
+                        if (BatSpinScript.Current.batSpinCurrentCount != BatSpinScript.Current.batSpinMaxCount)
+                        {
+
+                            EightyPercent(other.gameObject);
+                        }
+                        else
+                        {
+                            SixtyPercent(other.gameObject);
+                        }
+                    }
+
+                    if (other.transform.GetChild(0).GetComponent<ReferenceObjectExitScript>().checkBumperCar)
+                    {
+
+                        if (BumperCarScript.Current.bumberCarCurrentCount != BumperCarScript.Current.bumberCarMaxCount)
+                        {
+
+                            EightyPercent(other.gameObject);
+                        }
+                        else
+                        {
+                            SixtyPercent(other.gameObject);
+                        }
+                    }
+
+                    if (other.transform.GetChild(0).GetComponent<ReferenceObjectExitScript>().checkCrazyDance)
+                    {
+
+                        if (CrazyDanceScript.Current.crazyDanceCurrentCount != CrazyDanceScript.Current.crazyDanceMaxCount)
+                        {
+
+                            EightyPercent(other.gameObject);
+                        }
+                        else
+                        {
+                            SixtyPercent(other.gameObject);
+                        }
+                    }
+
+                    if (other.transform.GetChild(0).GetComponent<ReferenceObjectExitScript>().checkSwing)
+                    {
+                        Debug.Log("FAK");
+                        if (SwingScript.Current.swingCurrentCount != SwingScript.Current.swingMaxCount)
+                        {
+
+                            SixtyPercent(other.gameObject);
+                        }
+                        else
+                        {
+                            FiftyPercent(other.gameObject);
                         }
                     }
 
@@ -355,7 +480,157 @@ public class CharacterController : MonoBehaviour
 
         }
 
-      
+        if (other.CompareTag("Gondol"))
+        {
+            inGondol = true;
+            //transform.DOPause();
+            if (!GondolScript.Current.gondolFull)
+            {
+                referenceObject.GetComponent<ReferenceObjectScript>().queue.Remove(gameObject);
+                GondolScript.Current.gondolCurrentCount++;
+                MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+                //MoneySystem.Current.money += 20f;
+                //HappiniesSystem.Current.happiniesAmount += 0.05f;
+                gameObject.SetActive(false);
+                //transform.DOPause();
+                transform.DOPlay();
+
+
+
+
+            }
+            else
+            {
+                Debug.Log("GondolQueue");
+                gondolQueue = true;
+                //transform.DOPause();
+                transform.DOPause();
+            }
+
+
+        }
+
+        if (other.CompareTag("BatSpin"))
+        {
+            inBatSpin = true;
+            //transform.DOPause();
+            if (!BatSpinScript.Current.batSpinFull)
+            {
+                referenceObject.GetComponent<ReferenceObjectScript>().queue.Remove(gameObject);
+                BatSpinScript.Current.batSpinCurrentCount++;
+                MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+                //MoneySystem.Current.money += 20f;
+                //HappiniesSystem.Current.happiniesAmount += 0.05f;
+                gameObject.SetActive(false);
+                //transform.DOPause();
+                transform.DOPlay();
+
+
+
+
+            }
+            else
+            {
+                Debug.Log("OctopusQueue");
+                batSpinQueue = true;
+                //transform.DOPause();
+                transform.DOPause();
+            }
+
+
+        }
+
+        if (other.CompareTag("BumperCar"))
+        {
+            inBumperCar = true;
+            //transform.DOPause();
+            if (!BumperCarScript.Current.bumperCarFull)
+            {
+                referenceObject.GetComponent<ReferenceObjectScript>().queue.Remove(gameObject);
+                BumperCarScript.Current.bumberCarCurrentCount++;
+                MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+                //MoneySystem.Current.money += 20f;
+                //HappiniesSystem.Current.happiniesAmount += 0.05f;
+                gameObject.SetActive(false);
+                //transform.DOPause();
+                transform.DOPlay();
+
+
+
+
+            }
+            else
+            {
+                Debug.Log("OctopusQueue");
+                bumperCarQueue = true;
+                //transform.DOPause();
+                transform.DOPause();
+            }
+
+
+        }
+
+        if (other.CompareTag("CrazyDance"))
+        {
+            inCrazyDance = true;
+            //transform.DOPause();
+            if (!CrazyDanceScript.Current.crazyDanceFull)
+            {
+                referenceObject.GetComponent<ReferenceObjectScript>().queue.Remove(gameObject);
+                CrazyDanceScript.Current.crazyDanceCurrentCount++;
+                MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+                //MoneySystem.Current.money += 20f;
+                //HappiniesSystem.Current.happiniesAmount += 0.05f;
+                gameObject.SetActive(false);
+                //transform.DOPause();
+                transform.DOPlay();
+
+
+
+
+            }
+            else
+            {
+                Debug.Log("OctopusQueue");
+                crazyDanceQueue = true;
+                //transform.DOPause();
+                transform.DOPause();
+            }
+
+
+        }
+
+        if (other.CompareTag("Swing"))
+        {
+            inSwing = true;
+            //transform.DOPause();
+            if (!SwingScript.Current.swingFull)
+            {
+                referenceObject.GetComponent<ReferenceObjectScript>().queue.Remove(gameObject);
+                SwingScript.Current.swingCurrentCount++;
+                MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+                //MoneySystem.Current.money += 20f;
+                //HappiniesSystem.Current.happiniesAmount += 0.05f;
+                gameObject.SetActive(false);
+                //transform.DOPause();
+                transform.DOPlay();
+
+
+
+
+            }
+            else
+            {
+                Debug.Log("SwingQueue");
+                swingQueue = true;
+                //transform.DOPause();
+                transform.DOPause();
+            }
+
+
+        }
+
+
         if (other.CompareTag("Character") && referenceObject != null)
         {
             //Debug.Log("PAUSE");
@@ -441,7 +716,7 @@ public class CharacterController : MonoBehaviour
 
             referenceObject = other.gameObject;
 
-            if(referenceObject.GetComponent<ReferenceObjectScript>().queue.Count <= 5)
+            if(referenceObject.GetComponent<ReferenceObjectScript>().queue.Count <= 7)
             {
                 inPath = true;
                 transform.DOPath(other.GetComponent<ReferenceObjectScript>().ownWaypoint, 3.5f, PathType.CatmullRom, PathMode.Full3D, 10).SetId("1");
@@ -467,7 +742,7 @@ public class CharacterController : MonoBehaviour
 
         if (randomDecider == 1 || randomDecider == 2)
         {
-            /*inPath = true;
+           /* inPath = true;
            transform.DOPath(other.GetComponent<ReferenceObjectScript>().ownWaypoint, 3.5f, PathType.CatmullRom, PathMode.Full3D, 10).SetId("1");
 
            referenceObject = other.gameObject;
@@ -475,7 +750,7 @@ public class CharacterController : MonoBehaviour
 
             referenceObject = other.gameObject;
 
-            if (referenceObject.GetComponent<ReferenceObjectScript>().queue.Count <= 5)
+            if (referenceObject.GetComponent<ReferenceObjectScript>().queue.Count <= 7)
             {
                 inPath = true;
                 transform.DOPath(other.GetComponent<ReferenceObjectScript>().ownWaypoint, 3.5f, PathType.CatmullRom, PathMode.Full3D, 10).SetId("1");
@@ -508,7 +783,7 @@ public class CharacterController : MonoBehaviour
 
             referenceObject = other.gameObject;
 
-            if (referenceObject.GetComponent<ReferenceObjectScript>().queue.Count <= 5)
+            if (referenceObject.GetComponent<ReferenceObjectScript>().queue.Count <= 7)
             {
                 inPath = true;
                 transform.DOPath(other.GetComponent<ReferenceObjectScript>().ownWaypoint, 3.5f, PathType.CatmullRom, PathMode.Full3D, 10).SetId("1");
@@ -531,7 +806,7 @@ public class CharacterController : MonoBehaviour
         //transform.Translate(Vector3.zero* 0 * Time.deltaTime);
         //transform.Translate(Vector3.up * 0 * Time.deltaTime);
 
-        transform.DOMove(new Vector3(-50f, transform.position.y, transform.position.z), 30f).SetEase(Ease.Linear).OnComplete(()=>Destroy(gameObject));
+        transform.DOMove(new Vector3(-10f, transform.position.y, transform.position.z), 30f).SetEase(Ease.Linear).OnComplete(()=>gameObject.SetActive(false));
 
 
     }

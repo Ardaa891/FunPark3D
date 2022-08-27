@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 //using Dreamteck.Splines;
-//using MoreMountains.NiceVibrations;
+using MoreMountains.NiceVibrations;
 //using ElephantSDK;
 using UnityEngine.EventSystems;
 
@@ -66,7 +66,10 @@ public class LevelController : MonoBehaviour
 
     private void Update()
     {
-        
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            PlayerPrefs.SetInt("Tutorial", 1);
+        }
     }
 
 
@@ -120,7 +123,10 @@ public class LevelController : MonoBehaviour
 
     public void StartLevel()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 1)
+        //Elephant.LevelStarted(PlayerPrefs.GetInt("level") + 1);
+        lineObject.GetComponent<LineObjectScript>().trail.enabled = false;
+
+        if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             gameActive = true;
             levelStartMenu.SetActive(false);
@@ -141,17 +147,24 @@ public class LevelController : MonoBehaviour
 
     public void Win()
     {
+        //Elephant.LevelCompleted(PlayerPrefs.GetInt("level") + 1);
         gameActive = false;
         inGameMenu.SetActive(false);
         winGameOverMenu.SetActive(true);
+        MMVibrationManager.Haptic(HapticTypes.Success);
+
     }
 
     public void GameOver()
     {
+        //Elephant.LevelFailed(PlayerPrefs.GetInt("level") + 1);
         gameActive = false;
         inGameMenu.SetActive(false);
         failGameOverMenu.SetActive(true);
+        MMVibrationManager.Haptic(HapticTypes.Failure);
     }
+
+
 
   
 

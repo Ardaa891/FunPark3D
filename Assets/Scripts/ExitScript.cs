@@ -34,7 +34,7 @@ public class ExitScript : MonoBehaviour
 
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
-                tutorialManager.SetActive(true);
+                //tutorialManager.SetActive(true);
             }
         }
     }

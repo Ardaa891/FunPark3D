@@ -30,6 +30,7 @@ public class ButtonClickScript : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pointerDown = true;
         circleClipper.GetComponent<RuntimeCircleClipper>().enabled = false;
         lineObject.GetComponent<LineObjectScript>().enabled = false;
+        
     }
 
    
@@ -39,19 +40,26 @@ public class ButtonClickScript : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pointerDown = false;
         circleClipper.GetComponent<RuntimeCircleClipper>().enabled = true;
         lineObject.GetComponent<LineObjectScript>().enabled = true;
+        //gameObject.SetActive(false);
+
+        
+
+        StartCoroutine(ButtonDeactivator());
     }
 
-    /*private void Update()
+    
+
+
+
+    IEnumerator ButtonDeactivator()
     {
-        if (pointerDown)
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        while (true)
         {
-            circleClipper.GetComponent<RuntimeCircleClipper>().enabled = false;
-            lineObject.GetComponent<LineObjectScript>().enabled = false;
+            gameObject.SetActive(false);
         }
-        else if(!pointerDown)
-        {
-            circleClipper.GetComponent<RuntimeCircleClipper>().enabled = true;
-            lineObject.GetComponent<LineObjectScript>().enabled = true;
-        }
-    }*/
+
+       
+    }
 }

@@ -24,6 +24,8 @@ public class RocketScript : MonoBehaviour
 
     public GameObject rocketChar1, rocketChar2, rocketChar3;
 
+    public GameObject pathExitObject;
+
     Animator anim;
     
 
@@ -105,10 +107,11 @@ public class RocketScript : MonoBehaviour
         if (other.CompareTag("PathTriggerExit"))
         {
 
-           
+            pathExitObject = other.gameObject;
 
 
-           
+
+
         }
 
 
@@ -124,7 +127,7 @@ public class RocketScript : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = Random.Range(1, 4);
+            float waitTime = Random.Range(1, 3);
             yield return new WaitForSecondsRealtime(waitTime);
 
             if (rocketFull)
@@ -141,12 +144,19 @@ public class RocketScript : MonoBehaviour
                 tmp.GetComponent<CharacterController>().inRocket = false;
                 tmp.GetComponent<CharacterExit>().happy = true;
                 tmp.GetComponent<CharacterExit>().giveMoney = true;
-                
+
+                //pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue.Remove(pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue[0]);
+                Invoke("RemoveChars", 0.1f);
             }
            
             
         }
     }
 
-    
+    public void RemoveChars()
+    {
+        pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue.Remove(pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue[0]);
+    }
+
+
 }

@@ -12,6 +12,11 @@ public class ReferenceObjectExitScript : MonoBehaviour
     public bool checkRocket;
     public bool checkFerris;
     public bool checkTrain;
+    public bool checkGondol;
+    public bool checkBatSpin;
+    public bool checkBumperCar;
+    public bool checkCrazyDance;
+    public bool checkSwing;
 
     public List<GameObject> queue;
 
@@ -51,9 +56,44 @@ public class ReferenceObjectExitScript : MonoBehaviour
             checkTrain = true;
         }
 
+        if (other.CompareTag("Gondol"))
+        {
+            Debug.Log("ocExit");
+            truePath = true;
+            checkGondol = true;
+        }
 
-       
-        
+        if (other.CompareTag("BatSpin"))
+        {
+            Debug.Log("ocExit");
+            truePath = true;
+            checkBatSpin = true;
+        }
+
+        if (other.CompareTag("BumperCar"))
+        {
+            Debug.Log("ocExit");
+            truePath = true;
+            checkBumperCar = true;
+        }
+
+        if (other.CompareTag("CrazyDance"))
+        {
+            Debug.Log("ocExit");
+            truePath = true;
+            checkCrazyDance = true;
+        }
+
+        if (other.CompareTag("Swing"))
+        {
+            Debug.Log("Exit");
+            truePath = true;
+            checkSwing = true;
+        }
+
+
+
+
     }
 
     

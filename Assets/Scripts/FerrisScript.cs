@@ -16,7 +16,10 @@ public class FerrisScript : MonoBehaviour
     public float ferrisMaxCount;
 
     public bool ferrisFull;
-   
+
+    public GameObject pathExitObject;
+
+
     void Start()
     {
         Current = this;
@@ -66,22 +69,15 @@ public class FerrisScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.CompareTag("Character"))
+        if (other.CompareTag("PathTriggerExit"))
         {
 
-            if (ferrisCurrentCount < ferrisMaxCount)
-            {
-                ferrisCurrentCount++;
-
-                //rocketFull = false;  
-            }
-            else
-            {
-                //rocketFull = true;
-            }
+            pathExitObject = other.gameObject;
 
 
-        }*/
+
+
+        }
     }
 
 
@@ -90,7 +86,7 @@ public class FerrisScript : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = Random.Range(1, 4);
+            float waitTime = Random.Range(1, 3);
             yield return new WaitForSecondsRealtime(waitTime);
 
             if (ferrisFull)
@@ -108,9 +104,16 @@ public class FerrisScript : MonoBehaviour
                 tmp.GetComponent<CharacterExit>().happy = true;
                 tmp.GetComponent<CharacterExit>().giveMoney = true;
 
+                //pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue.Remove(pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue[0]);
+                Invoke("RemoveChars", 0.1f);
             }
 
 
         }
+    }
+
+    public void RemoveChars()
+    {
+        pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue.Remove(pathExitObject.transform.parent.GetComponent<ReferenceObjectScript>().queue[0]);
     }
 }

@@ -11,7 +11,7 @@ public class LineObjectScript : MonoBehaviour
 {
     
     [SerializeField] LayerMask layerMask;
-    TrailRenderer trail;
+    public TrailRenderer trail;
     public Vector3[] positions;
     
     public GameObject referenceObject;
@@ -28,6 +28,8 @@ public class LineObjectScript : MonoBehaviour
 
     public bool avaliablePath;
 
+    public GameObject handObject;
+
     
 
 
@@ -41,14 +43,16 @@ public class LineObjectScript : MonoBehaviour
         trail.enabled = false;
         drawCount = 3;
         drawCountText.text = drawCount.ToString() + " left";
+        handObject = GameObject.FindGameObjectWithTag("HandObject");
+        
     }
 
    
     void Update()
     {
         drawCountText.text = drawCount.ToString() + " left";
-
-        if (EventSystem.current.currentSelectedGameObject == null) //&& LevelController.Current.gameActive)
+        
+        if (EventSystem.current.currentSelectedGameObject == null || LevelController.Current.gameActive)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -62,28 +66,47 @@ public class LineObjectScript : MonoBehaviour
             }
         }
 
-            
-
-
-
-
         
-        
-        if (Input.GetMouseButton(0))
+
+        if (Input.GetMouseButtonDown(0))
         {
-            
-
-
 
             if(drawCount > 0)
             {
                 trail.enabled = true;
                 MMVibrationManager.Haptic(HapticTypes.MediumImpact);
 
-                if (SceneManager.GetActiveScene().buildIndex == 1)
+               /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100, layerMask))
+                {
+                    //Debug.Log(Ray Girdi”);
+                    Vector3 point = hit.point;
+                    point.z = -0.05f;
+                    transform.position = point;
+                    Debug.DrawLine(ray.origin, hit.point);
+                }*/
+
+                if (SceneManager.GetActiveScene().buildIndex == 2)
                 {
                     Destroy(tutorialManager);
                     TutorialManager.Current.blackCanvas.gameObject.SetActive(false);
+                    transform.GetChild(0).gameObject.SetActive(true);
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 100, layerMask))
+                    {
+                        //Debug.Log(Ray Girdi”);
+                        Vector3 point = hit.point;
+                        point.z = -0.05f;
+                        transform.position = point;
+                        Debug.DrawLine(ray.origin, hit.point);
+                    }
+
+
+
+
                 }
             }
 
@@ -112,13 +135,19 @@ public class LineObjectScript : MonoBehaviour
 
             referenceExit.transform.SetParent(reference.transform);
 
-            //drawCount--;
+            /*if (referenceExit.GetComponent<ReferenceObjectExitScript>().truePath)
+            {
+                drawCount--;
+            }*/
+            drawCount--;
 
-            if(drawCount <= 0)
+
+            if (drawCount <= 0)
             {
                 circleClipper.GetComponent<RuntimeCircleClipper>().enabled = false;
             }
 
+            transform.GetChild(0).gameObject.SetActive(false);
             
 
         }
