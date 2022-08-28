@@ -76,7 +76,7 @@ public class CharacterController : MonoBehaviour
             if (startPointReached)
             {
                
-                if(SceneManager.GetActiveScene().buildIndex == 1)
+                if(SceneManager.GetActiveScene().buildIndex == 2)
                 {
                     if (inPath)
                     {
@@ -87,7 +87,7 @@ public class CharacterController : MonoBehaviour
                         transform.Translate(Vector3.up * 1f * Time.deltaTime);
                         transform.Translate(Vector3.forward * 1f * Time.deltaTime);
                     }
-                }else if(SceneManager.GetActiveScene().buildIndex != 1)
+                }else if(SceneManager.GetActiveScene().buildIndex != 2)
                 {
                     if(inPath)
                     {

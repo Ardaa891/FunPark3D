@@ -121,8 +121,8 @@ public class LevelController : MonoBehaviour
     public void StartLevel()
     {
         //Elephant.LevelStarted(PlayerPrefs.GetInt("level") + 1);
-        lineObject.GetComponent<LineObjectScript>().trail.enabled = false;
-
+        //lineObject.GetComponent<LineObjectScript>().trail.enabled = false;
+        
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             gameActive = true;

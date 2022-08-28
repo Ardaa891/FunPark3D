@@ -30,8 +30,8 @@ public class LineObjectScript : MonoBehaviour
 
     public GameObject handObject;
 
-    
 
+    public bool touched;
 
     
 
@@ -40,10 +40,13 @@ public class LineObjectScript : MonoBehaviour
     void Start()
     {
         trail = GetComponent<TrailRenderer>();
-        trail.enabled = false;
+        
         drawCount = 3;
         drawCountText.text = drawCount.ToString() + " left";
         handObject = GameObject.FindGameObjectWithTag("HandObject");
+
+
+
         
     }
 
@@ -52,7 +55,7 @@ public class LineObjectScript : MonoBehaviour
     {
         drawCountText.text = drawCount.ToString() + " left";
         
-        if (EventSystem.current.currentSelectedGameObject == null || LevelController.Current.gameActive)
+        if (/*EventSystem.current.currentSelectedGameObject == null ||*/ LevelController.Current.gameActive)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -73,7 +76,9 @@ public class LineObjectScript : MonoBehaviour
 
             if(drawCount > 0)
             {
+                touched = true;
                 trail.enabled = true;
+                
                 MMVibrationManager.Haptic(HapticTypes.MediumImpact);
 
                /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -93,7 +98,21 @@ public class LineObjectScript : MonoBehaviour
                     TutorialManager.Current.blackCanvas.gameObject.SetActive(false);
                     transform.GetChild(0).gameObject.SetActive(true);
 
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    /*if (LevelController.Current.gameActive)
+                    {
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit, 100, layerMask))
+                        {
+                            //Debug.Log(Ray Girdi”);
+                            Vector3 point = hit.point;
+                            point.z = -0.05f;
+                            transform.position = point;
+                            Debug.DrawLine(ray.origin, hit.point);
+                        }
+                    }*/
+
+                    /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit, 100, layerMask))
                     {
@@ -102,7 +121,7 @@ public class LineObjectScript : MonoBehaviour
                         point.z = -0.05f;
                         transform.position = point;
                         Debug.DrawLine(ray.origin, hit.point);
-                    }
+                    }*/
 
 
 
@@ -128,11 +147,12 @@ public class LineObjectScript : MonoBehaviour
 
             positions = new Vector3[trail.positionCount];
             trail.GetPositions(positions);
+
             GameObject reference = Instantiate(referenceObject, positions[0], Quaternion.identity);
             GameObject referenceExit = Instantiate(referenceObjectExit, positions[trail.positionCount - 1], Quaternion.identity);
             trail.Clear();
             trail.enabled = false;
-
+            
             referenceExit.transform.SetParent(reference.transform);
 
             /*if (referenceExit.GetComponent<ReferenceObjectExitScript>().truePath)

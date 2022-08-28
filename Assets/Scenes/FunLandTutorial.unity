@@ -359,6 +359,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  trail: {fileID: 0}
   positions: []
   referenceObject: {fileID: 2336151113855804637, guid: 4dbe1b07b0cd848f49dc230bb94e3797,
     type: 3}
@@ -374,6 +375,7 @@ MonoBehaviour:
   circleClipper: {fileID: 1179013656}
   avaliablePath: 0
   handObject: {fileID: 1509790758}
+  touched: 0
 --- !u!65 &65084862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1075,7 +1077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &304900637
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2728,6 +2730,7 @@ GameObject:
   - component: {fileID: 523649526}
   - component: {fileID: 523649525}
   - component: {fileID: 523649524}
+  - component: {fileID: 523649527}
   m_Layer: 5
   m_Name: StartGameButton
   m_TagString: Untagged
@@ -2850,6 +2853,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523649522}
   m_CullTransparentMesh: 1
+--- !u!114 &523649527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523649522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3641a5bf158254526947f747b3f989f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  circleClipper: {fileID: 1179013656}
+  lineObject: {fileID: 65084860}
 --- !u!1 &547970658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,6 +3024,7 @@ MonoBehaviour:
   drawRay: 0
   availableToys: 0
   circleClipper: {fileID: 1179013656}
+  lineObject: {fileID: 0}
   CurrentLevel: {fileID: 0}
   isTesting: 0
 --- !u!1 &571729912
@@ -7908,6 +7927,7 @@ MonoBehaviour:
   batSpinPrice: 0
   bumperCarPrice: 0
   crazyDancePrice: 0
+  swingPrice: 0
   rocketToyUnlockButton: {fileID: 1859349220}
   ferrisWheelUnlockButton: {fileID: 36006598}
   octopusTrainUnlockButton: {fileID: 0}
@@ -7915,6 +7935,7 @@ MonoBehaviour:
   batSpinUnlockButton: {fileID: 0}
   bumperCarUnlockButton: {fileID: 0}
   crazyDanceUnlockButton: {fileID: 0}
+  swingUnlockButton: {fileID: 0}
   cricleClipper: {fileID: 0}
 --- !u!1 &1947484118
 GameObject:

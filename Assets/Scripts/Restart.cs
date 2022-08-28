@@ -19,7 +19,7 @@ public class Restart : MonoBehaviour
 
     public void RestartGame()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 1)
+        if(SceneManager.GetActiveScene().buildIndex != 2)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

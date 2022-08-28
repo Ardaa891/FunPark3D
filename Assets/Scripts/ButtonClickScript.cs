@@ -30,7 +30,7 @@ public class ButtonClickScript : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pointerDown = true;
         circleClipper.GetComponent<RuntimeCircleClipper>().enabled = false;
         lineObject.GetComponent<LineObjectScript>().enabled = false;
-        
+       
     }
 
    

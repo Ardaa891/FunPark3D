@@ -21,7 +21,7 @@ public class CharacterSpawner : MonoBehaviour
     
     void Update()
     {
-        if (LevelController.Current.gameActive && SceneManager.GetActiveScene().buildIndex == 1)
+        if (LevelController.Current.gameActive && SceneManager.GetActiveScene().buildIndex == 2)
         {
             //StartCoroutine(StartTutorial());
 

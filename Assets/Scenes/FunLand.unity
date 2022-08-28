@@ -1176,6 +1176,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  trail: {fileID: 0}
   positions: []
   referenceObject: {fileID: 2336151113855804637, guid: 4dbe1b07b0cd848f49dc230bb94e3797,
     type: 3}
@@ -1191,6 +1192,7 @@ MonoBehaviour:
   circleClipper: {fileID: 1179013656}
   avaliablePath: 0
   handObject: {fileID: 0}
+  touched: 0
 --- !u!65 &65084862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6857,6 +6859,7 @@ MonoBehaviour:
   drawRay: 0
   availableToys: 0
   circleClipper: {fileID: 1179013656}
+  lineObject: {fileID: 0}
   CurrentLevel: {fileID: 1616734879}
   isTesting: 0
 --- !u!1 &606504480
@@ -21331,7 +21334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2012850867
 RectTransform:
   m_ObjectHideFlags: 0
