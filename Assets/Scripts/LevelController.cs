@@ -23,7 +23,7 @@ public class LevelController : MonoBehaviour
     
     public GameObject circleClipper;
 
-    GameObject lineObject;
+    public  GameObject lineObject;
     
 
 
@@ -66,10 +66,7 @@ public class LevelController : MonoBehaviour
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            PlayerPrefs.SetInt("Tutorial", 1);
-        }
+       
     }
 
 
@@ -152,6 +149,13 @@ public class LevelController : MonoBehaviour
         inGameMenu.SetActive(false);
         winGameOverMenu.SetActive(true);
         MMVibrationManager.Haptic(HapticTypes.Success);
+
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+           
+                PlayerPrefs.SetInt("Tutorial", 1);
+            
+        }
 
     }
 
