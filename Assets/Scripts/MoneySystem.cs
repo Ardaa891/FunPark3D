@@ -156,108 +156,142 @@ public class MoneySystem : MonoBehaviour
     public void UnlockRocketToy()
     {
         Debug.Log("click");
+        if (LevelController.Current.gameActive)
+        {
+            GameObject rocket = GameObject.FindGameObjectWithTag("RocketToy");
 
-        GameObject rocket = GameObject.FindGameObjectWithTag("RocketToy");
-        
-        rocket.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        rocketToyUnlockButton.gameObject.SetActive(false);
-        
-        LevelController.Current.availableToys++;
-        rocket.GetComponent<BoxCollider>().enabled = true;
+            rocket.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            rocketToyUnlockButton.gameObject.SetActive(false);
 
-        //money -= rocketToyPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - rocketToyPrice);
+            LevelController.Current.availableToys++;
+            rocket.GetComponent<BoxCollider>().enabled = true;
+
+            //money -= rocketToyPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - rocketToyPrice);
+        }
+        
     }
 
     public void UnlockFerrisWheel()
     {
-        GameObject ferris = GameObject.FindGameObjectWithTag("FerrisWheel");
-        ferris.transform.DOScale(0.175f, 0.7f).SetEase(Ease.OutBounce);
-        ferrisWheelUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
 
-        ferris.GetComponent<BoxCollider>().enabled = true;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject ferris = GameObject.FindGameObjectWithTag("FerrisWheel");
+            ferris.transform.DOScale(0.175f, 0.7f).SetEase(Ease.OutBounce);
+            ferrisWheelUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - ferrisWheelPrice);
+            ferris.GetComponent<BoxCollider>().enabled = true;
+
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - ferrisWheelPrice);
+        }
+        
     }
 
     public void UnlockOctopusTrain()
     {
-        GameObject octopusTrain = GameObject.FindGameObjectWithTag("OctopusTrain");
-        octopusTrain.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        octopusTrainUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject octopusTrain = GameObject.FindGameObjectWithTag("OctopusTrain");
+            octopusTrain.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            octopusTrainUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        octopusTrain.GetComponent<SphereCollider>().enabled = true;
+            octopusTrain.GetComponent<SphereCollider>().enabled = true;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - octopusTrainPrice);
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - octopusTrainPrice);
+        }
+        
     }
 
     public void UnlockGondol()
     {
-        GameObject gondol = GameObject.FindGameObjectWithTag("Gondol");
-        gondol.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        gondolUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject gondol = GameObject.FindGameObjectWithTag("Gondol");
+            gondol.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            gondolUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        gondol.GetComponent<BoxCollider>().enabled = true;
+            gondol.GetComponent<BoxCollider>().enabled = true;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - gondolPrice);
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - gondolPrice);
+        }
+        
     }
 
     public void UnlockBatSpin()
     {
-        GameObject batSpin = GameObject.FindGameObjectWithTag("BatSpin");
-        batSpin.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        batSpinUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject batSpin = GameObject.FindGameObjectWithTag("BatSpin");
+            batSpin.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            batSpinUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        batSpin.GetComponent<SphereCollider>().enabled = true;
+            batSpin.GetComponent<SphereCollider>().enabled = true;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - batSpinPrice);
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - batSpinPrice);
+        }
+
+        
     }
 
     public void UnlockBumperCar()
     {
-        GameObject bumperCar = GameObject.FindGameObjectWithTag("BumperCar");
-        bumperCar.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        ferrisWheelUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject bumperCar = GameObject.FindGameObjectWithTag("BumperCar");
+            bumperCar.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            ferrisWheelUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        bumperCar.GetComponent<BoxCollider>().enabled = true;
+            bumperCar.GetComponent<BoxCollider>().enabled = true;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - bumperCarPrice);
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - bumperCarPrice);
+        }
+        
     }
 
     public void UnlockCrazyDance()
     {
-        GameObject crazyDance = GameObject.FindGameObjectWithTag("CrazyDance");
-        crazyDance.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        crazyDanceUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
 
-        crazyDance.GetComponent<BoxCollider>().enabled = true;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject crazyDance = GameObject.FindGameObjectWithTag("CrazyDance");
+            crazyDance.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            crazyDanceUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - crazyDancePrice);
+            crazyDance.GetComponent<BoxCollider>().enabled = true;
+
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - crazyDancePrice);
+        }
+        
     }
 
     public void UnlockSwing()
     {
-        GameObject swing = GameObject.FindGameObjectWithTag("Swing");
-        swing.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
-        crazyDanceUnlockButton.gameObject.SetActive(false);
-        LevelController.Current.availableToys++;
+        if (LevelController.Current.gameActive)
+        {
+            GameObject swing = GameObject.FindGameObjectWithTag("Swing");
+            swing.transform.DOScale(0.2f, 0.7f).SetEase(Ease.OutBounce);
+            crazyDanceUnlockButton.gameObject.SetActive(false);
+            LevelController.Current.availableToys++;
 
-        swing.GetComponent<BoxCollider>().enabled = true;
+            swing.GetComponent<BoxCollider>().enabled = true;
 
-        //money -= ferrisWheelPrice;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - swingPrice);
+            //money -= ferrisWheelPrice;
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - swingPrice);
+        }
+        
     }
 
 

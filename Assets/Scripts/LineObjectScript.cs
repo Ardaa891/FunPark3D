@@ -159,7 +159,7 @@ public class LineObjectScript : MonoBehaviour
             {
                 drawCount--;
             }*/
-            drawCount--;
+            //drawCount--;
 
 
             if (drawCount <= 0)

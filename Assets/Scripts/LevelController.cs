@@ -103,11 +103,17 @@ public class LevelController : MonoBehaviour
 
             levels[(PlayerPrefs.GetInt("level")) % levels.Count].SetActive(false);
 
+            winGameOverMenu.SetActive(false);
+
 
             PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("level") + 1);
 
-            levels[PlayerPrefs.GetInt("level") % levels.Count].SetActive(true);
+            //levels[PlayerPrefs.GetInt("level") % levels.Count].SetActive(true);
+            StartCoroutine(LoadNextLevel());
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            
 
         }
 
@@ -169,7 +175,15 @@ public class LevelController : MonoBehaviour
     }
 
 
+    IEnumerator LoadNextLevel()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
 
+        //PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("level") + 1);
+
+        levels[PlayerPrefs.GetInt("level") % levels.Count].SetActive(true);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
   
 
     

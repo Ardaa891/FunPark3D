@@ -27,9 +27,14 @@ public class ButtonClickScript : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        pointerDown = true;
-        circleClipper.GetComponent<RuntimeCircleClipper>().enabled = false;
-        lineObject.GetComponent<LineObjectScript>().enabled = false;
+
+        if (LevelController.Current.gameActive)
+        {
+            pointerDown = true;
+            circleClipper.GetComponent<RuntimeCircleClipper>().enabled = false;
+            lineObject.GetComponent<LineObjectScript>().enabled = false;
+        }
+        
        
     }
 
@@ -37,14 +42,19 @@ public class ButtonClickScript : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        pointerDown = false;
-        circleClipper.GetComponent<RuntimeCircleClipper>().enabled = true;
-        lineObject.GetComponent<LineObjectScript>().enabled = true;
-        //gameObject.SetActive(false);
+        if (LevelController.Current.gameActive)
+        {
+            pointerDown = false;
+            circleClipper.GetComponent<RuntimeCircleClipper>().enabled = true;
+            lineObject.GetComponent<LineObjectScript>().enabled = true;
+            //gameObject.SetActive(false);
 
-        
 
-        StartCoroutine(ButtonDeactivator());
+
+            StartCoroutine(ButtonDeactivator());
+        }
+
+       
     }
 
     

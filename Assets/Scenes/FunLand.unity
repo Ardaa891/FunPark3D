@@ -2092,7 +2092,7 @@ RectTransform:
   m_Children:
   - {fileID: 162546704}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6834,7 +6834,7 @@ Transform:
   - {fileID: 465468304}
   - {fileID: 1616734880}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567005677
 MonoBehaviour:
